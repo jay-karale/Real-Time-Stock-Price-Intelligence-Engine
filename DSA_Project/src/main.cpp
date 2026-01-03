@@ -11,9 +11,16 @@
 #include"Utils.hpp"
 
 using namespace std;
-system("cls"); 
+
+void PriceStream::AddPrice(double p){
+    price.push_back(p);
+}
+int PriceStream::GetPriceCount()const{
+    return price.size();
+}
 
 int main (){
+  
    int n;
    cout <<" DSA Project - Real-Time-Stock-Price-Intelligence-System"<<endl;
    cout<<" -----------------------------------------------------"<<endl;
@@ -33,9 +40,32 @@ int main (){
     cout<<"Enter your Choice (0-9) : ";
     cin>>n;
     switch(n){
-        case 1:
+        case 1:{
             cout<<" Price Stream Management Selected "<<endl;
+            PriceStream ps;
+            int subchoice;
+            while(true){
+                cout << "1. Add Price" << endl;
+                cout << "2. Get Price Count" << endl;
+                cout << "3. Back to Main Menu" << endl;
+                cout << "Enter your choice: ";
+                cin >> subchoice;
+                if(subchoice == 1){
+                    double p;
+                    cout << "Enter price: ";
+                    cin >> p;
+                    ps.AddPrice(p);
+                    cout << "Price added successfully." << endl;
+                } else if(subchoice == 2){
+                    cout << "Current price count: " << ps.GetPriceCount() << endl;
+                } else if(subchoice == 3){
+                    break;
+                } else {
+                    cout << "Invalid choice, try again." << endl;
+                }
+            }
             break;
+        }
         case 2:
             cout<<" Max/Min Price Tracking Selected "<<endl;
             break;

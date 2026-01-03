@@ -3,6 +3,6 @@
 
 class MovingAverage{
     
-}
+};
 
 #endif
