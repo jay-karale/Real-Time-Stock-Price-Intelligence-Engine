@@ -3,6 +3,6 @@
 
 class SlidingWindowMedian{
     
-}
+};
 
 #endif 

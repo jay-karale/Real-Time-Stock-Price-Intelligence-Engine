@@ -3,6 +3,6 @@
 
 class MaxMinTracker{
     
-}
+};
 
 #endif
