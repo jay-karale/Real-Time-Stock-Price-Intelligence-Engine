@@ -57,16 +57,6 @@ This is an **educational simulation**, not a trading or stock-recommendation sys
 
 ---
 
-🎯 Why This Project Matters for Placements
-
-- Demonstrates **strong DSA fundamentals**
-- Shows ability to design **real-time, scalable systems**
-- Reflects understanding of **financial system internals**
-- Goes beyond basic CRUD or calculator-style projects
-- Suitable for **product-based companies, fintech, and trading firms**
-
----
-
 📌 Learning Outcomes
 
 - Designing systems for streaming data
