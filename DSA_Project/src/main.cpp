@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
+#include<limits>
 #include"PriceStream.hpp"
 #include"MaxMinTracker.hpp"
 #include"MedianTracker.hpp"
@@ -39,6 +40,12 @@ int main (){
    while(true){
     cout<<"Enter your Choice (0-9) : ";
     cin>>n;
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter a number between 1 and 10." << endl;
+        continue;
+    }
     switch(n){
         case 1:{
             cout<<" Price Stream Management Selected "<<endl;
@@ -50,6 +57,12 @@ int main (){
                 cout << "3. Back to Main Menu" << endl;
                 cout << "Enter your choice: ";
                 cin >> subchoice;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid input. Please enter a number between 1 and 3." << endl;
+                    continue;
+                }
                 if(subchoice == 1){
                     double p;
                     cout << "Enter price: ";
