@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdlib.h>
-#include<limits>
+#include<string>
+#include<sstream>
 #include"PriceStream.hpp"
 #include"MaxMinTracker.hpp"
 #include"MedianTracker.hpp"
@@ -39,11 +40,11 @@ int main (){
 
    while(true){
     cout<<"Enter your Choice (0-9) : ";
-    cin>>n;
-    if (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input. Please enter a number between 1 and 10." << endl;
+    string line;
+    getline(cin, line);
+    stringstream ss(line);
+    if(!(ss >> n)){
+        cout<<"Invalid choice, try again"<<endl;
         continue;
     }
     switch(n){
@@ -52,23 +53,28 @@ int main (){
             PriceStream ps;
             int subchoice;
             while(true){
-                cout << "1. Add Price" << endl;
+                cout << "1. Add Prices (multiple separated by spaces)" << endl;
                 cout << "2. Get Price Count" << endl;
                 cout << "3. Back to Main Menu" << endl;
                 cout << "Enter your choice: ";
-                cin >> subchoice;
-                if (cin.fail()) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    cout << "Invalid input. Please enter a number between 1 and 3." << endl;
+                string line;
+                getline(cin, line);
+                stringstream ss(line);
+                if(!(ss >> subchoice)){
+                    cout << "Invalid choice, try again." << endl;
                     continue;
                 }
                 if(subchoice == 1){
+                    cout << "Enter prices separated by spaces: ";
+                    getline(cin, line);
+                    stringstream ss2(line);
                     double p;
-                    cout << "Enter price: ";
-                    cin >> p;
-                    ps.AddPrice(p);
-                    cout << "Price added successfully." << endl;
+                    int count = 0;
+                    while(ss2 >> p){
+                        ps.AddPrice(p);
+                        count++;
+                    }
+                    cout << count << " prices added successfully." << endl;
                 } else if(subchoice == 2){
                     cout << "Current price count: " << ps.GetPriceCount() << endl;
                 } else if(subchoice == 3){
