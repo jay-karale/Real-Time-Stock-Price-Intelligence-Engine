@@ -1,84 +1,107 @@
-# Real-Time-Stock-Price-Intelligence-Engine
-A real-time stock price intelligence engine implemented in C++ using advanced data structures. Supports streaming analytics, statistical indicators, anomaly detection, and simplified trade matching to mirror real exchange behavior.
+📈 Real-Time Stock Price Intelligence Engine (Console Based)
 
-📈 Real-Time Stock Price Intelligence Engine
-
-A **C++ data-structure–driven project** that simulates **real-time stock price analysis and trade execution**.  
-This project is designed to demonstrate how **core DSA concepts are applied in real financial systems** such as stock exchanges and trading platforms.
-
----
+A console-based C++ project that simulates real-time stock price analysis using core Data Structures and Algorithms (DSA).
+The project processes a single price stream and derives multiple analytical insights similar to basic financial systems.
 
 🚀 Project Objective
 
-- Learn how real-world systems handle **continuous streaming data**
-- Apply **DSA concepts** to solve practical problems efficiently
-- Simulate **stock market analytics and order matching** at a learning scale
-- Build a **placement-oriented project** that showcases problem-solving and system design skills
+- Understand how streaming numerical data can be analyzed efficiently
 
----
+- Apply DSA concepts like heaps, vectors, and sliding windows
 
-🧠 Key Features
+- Build a placement-oriented, menu-driven C++ project
 
-- 🔄 **Real-time stock price streaming**
-- 📊 **Highest & Lowest price tracking** using heaps
-- ⚖️ **Real-time median calculation** using two-heaps approach
-- ⏳ **Sliding-window median** for recent price analysis
-- 📈 **Moving averages (SMA & EMA)** for trend detection
-- 📉 **Volatility analysis** using statistical measures
-- 🚨 **Anomaly detection** for sudden price spikes or drops
-- 🏦 **Order Book Simulation**
-  - Buy & Sell order placement
-  - Automatic order matching (exchange-style logic)
-  - Live order book view
+- Simulate basic stock market analytics at an educational level
 
----
+🧠 Key Features (Implemented)
+
+🔄 Price Stream Input
+
+- User enters prices once
+
+- All modules work on the same stored price stream
+
+📊 Max & Min Price Tracking
+
+- Finds highest and lowest price from the stream
+
+⚖️ Median Price Calculation
+
+- Computes median of all entered prices
+
+⏳ Sliding Window Median
+
+- Calculates median for recent prices using a fixed window
+
+📈 Moving Average
+
+- Computes average price to understand overall trend
+
+📉 Volatility Calculation
+
+- Measures price variation using simple statistical logic
+
+🚨 Anomaly Detection
+
+- Detects sudden price changes beyond a threshold
+
+🏦 Order Book Simulation (Basic)
+
+- Console-based buy/sell order simulation
+
+- Demonstrates how trades are conceptually executed
+
+- No real trading or matching engine involved
 
 🛠 Data Structures & Concepts Used
 
-- Priority Queue (Min Heap & Max Heap)
-- Two-Heaps Technique
-- Sliding Window Algorithms
-- Queue & Deque
-- Hash Maps
-- Prefix Sums
-- Basic Statistics (Mean, Variance, Standard Deviation)
+- vector for price storage
 
----
+- priority_queue (Min/Max Heap)
 
-🌍 Real-World Relevance
+- Sorting-based median logic
 
-This project models **core components used in actual trading systems**, such as:
-- Continuous price feeds
-- Real-time analytics engines
-- Exchange order-book and trade matching logic
+- Sliding window technique
 
-⚠️ *Note:*  
-This is an **educational simulation**, not a trading or stock-recommendation system.
+- Basic statistics (mean & deviation)
 
----
+- Modular design using .hpp and .cpp files
+
+- Object-Oriented Programming (OOP)
+
+🖥 Project Type
+
+- Console-based application
+
+- Menu-driven user interaction
+
+- No GUI, no external APIs
+
+- Focused on logic, DSA, and clean design
 
 📌 Learning Outcomes
 
-- Designing systems for streaming data
-- Optimizing operations using efficient algorithms
-- Translating real-world problems into data structures
-- Writing modular and maintainable C++ code
+- How multiple analytics modules can work on a single data source
 
----
+- Applying DSA concepts to real-life inspired problems
+
+- Writing modular, maintainable C++ code
+
+- Building confidence for technical interviews
 
 ▶️ How to Run
 
-1. Clone the repository  
-2. Compile using any C++17 compatible compiler  
-3. Run the executable and follow the console menu  
+- Clone the repository
 
----
+- Compile using a C++17 compatible compiler
 
-📎 Disclaimer
+- Run the executable
 
-This project is built **for learning and demonstration purposes only**  
-and does **not provide financial advice or trading recommendations**.
+- Use the menu to add prices and analyze data
 
----
+⚠️ Disclaimer
 
-⭐ If you find this project helpful, feel free to star the repository!
+This project is an educational simulation only.
+It does not provide financial advice or real trading functionality.
+
+⭐ If you find this project useful, feel free to star the repository!
