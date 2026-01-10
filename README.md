@@ -104,4 +104,4 @@ The project processes a single price stream and derives multiple analytical insi
 This project is an educational simulation only.
 It does not provide financial advice or real trading functionality.
 
-⭐ If you find this project useful, feel free to star the repository!
+⭐ Feedback and suggestions are welcome.
