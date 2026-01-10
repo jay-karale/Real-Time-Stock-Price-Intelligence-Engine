@@ -1,9 +1,12 @@
-#ifndef ORDER_BOOK_HPP
-#define ORDER_BOOK_HPP
+#ifndef ORDERBOOK_HPP
+#define ORDERBOOK_HPP
+
+#include <vector>
 
 class OrderBook {
 public:
-    void simulate() const;
+    void executeOrder(const std::vector<double>& prices);
 };
 
 #endif
+

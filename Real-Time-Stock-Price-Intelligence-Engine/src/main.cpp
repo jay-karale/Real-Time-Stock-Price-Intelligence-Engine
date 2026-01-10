@@ -87,7 +87,7 @@ int main() {
             anomaly.detect(priceStream.getPrices());
         }
         else if (choice == 8) {
-            orderBook.simulate();
+           orderBook.executeOrder(priceStream.getPrices());
         }
         else if (choice == 9) {
             cout << "Exiting Program...\n";
