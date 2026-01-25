@@ -7,7 +7,7 @@ The project processes a single price stream and derives multiple analytical insi
 
 - Understand how streaming numerical data can be analyzed efficiently
 
-- Apply DSA concepts like vectors and sliding windows
+- Apply DSA concepts like heap , vectors and sliding windows
 
 - Build a placement-oriented, menu-driven C++ project
 
