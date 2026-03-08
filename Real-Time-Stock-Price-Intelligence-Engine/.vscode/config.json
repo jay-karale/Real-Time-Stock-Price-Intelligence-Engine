@@ -1,0 +1,5 @@
+{
+  "sliding_window_size": 3,
+  "anomaly_threshold": 20,
+  "volatility_period": "daily"
+}
