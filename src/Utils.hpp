@@ -1,8 +1,9 @@
-#ifndef UTLIS_HPP
-#define UTLIS_HPP
- 
-class Utlis{
-    
+#ifndef UTILS_HPP
+#define UTILS_HPP
+
+class Utils {
+public:
+    void showLine() const;
 };
 
-#endif 
+#endif

@@ -1,8 +1,12 @@
-#ifndef MOVINGAVERAGE_HPP
-#define MOVINGAVERAGE_HPP
+#ifndef MOVING_AVERAGE_HPP
+#define MOVING_AVERAGE_HPP
 
-class MovingAverage{
-    
+#include <vector>
+
+class MovingAverage {
+public:
+    void showAverage(const std::vector<double>& prices) const;
 };
 
 #endif
+

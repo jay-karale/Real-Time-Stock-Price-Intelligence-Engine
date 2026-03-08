@@ -1,8 +1,11 @@
-#ifndef VOLATILITYTRACKER_HPP
-#define VOLATILITYTRACKER_HPP
+#ifndef VOLATILITY_TRACKER_HPP
+#define VOLATILITY_TRACKER_HPP
 
-class VolatilityTracker{
-    
+#include <vector>
+
+class VolatilityTracker {
+public:
+    void showVolatility(const std::vector<double>& prices) const;
 };
 
 #endif

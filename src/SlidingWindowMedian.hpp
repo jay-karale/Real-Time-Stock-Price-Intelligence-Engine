@@ -1,8 +1,11 @@
-#ifndef SLIDINGWINDOWMEDIAN_HPP
-#define SLIDINGWINDOWMEDIAN_HPP
+#ifndef SLIDING_WINDOW_MEDIAN_HPP
+#define SLIDING_WINDOW_MEDIAN_HPP
 
-class SlidingWindowMedian{
-    
+#include <vector>
+
+class SlidingWindowMedian {
+public:
+    void showSlidingMedian(const std::vector<double>& prices, int k) const;
 };
 
-#endif 
+#endif

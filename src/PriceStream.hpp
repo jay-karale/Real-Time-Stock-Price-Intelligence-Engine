@@ -1,13 +1,15 @@
-#ifndef PRICESTREAM_HPP
-#define PRICESTREAM_HPP
-#include<vector>
- 
-class PriceStream{
-    public :
-        void AddPrice(double price);
-        int GetPriceCount()const;
+#ifndef PRICE_STREAM_HPP
+#define PRICE_STREAM_HPP
 
-    private :
-        std::vector<double>price;
- };
-#endif 
+#include <vector>
+
+class PriceStream {
+public:
+    void addPrice(double p);
+    std::vector<double> getPrices() const;
+
+private:
+    std::vector<double> prices;
+};
+
+#endif

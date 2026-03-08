@@ -1,8 +1,11 @@
-#ifndef ANOMALYDETECTOR_HPP
-#define ANOMALYDETECTOR_HPP
+#ifndef ANOMALY_DETECTOR_HPP
+#define ANOMALY_DETECTOR_HPP
 
-class AnomalyDetector{
-    
+#include <vector>
+
+class AnomalyDetector {
+public:
+    void detect(const std::vector<double>& prices) const;
 };
 
 #endif

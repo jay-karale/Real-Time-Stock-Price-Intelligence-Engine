@@ -1,17 +1,11 @@
-#ifndef MAXMINTRACKER_HPP
-#define MAXMINTRACKER_HPP
-#include<queue>
-#include<vector>
+#ifndef MAXMIN_TRACKER_HPP
+#define MAXMIN_TRACKER_HPP
 
-class MaxMinTracker{
-    public:
-       void storePrice(double price);
-       void showMax()const;
-       void showMin()const;
+#include <vector>
 
-        private:
-        std::priority_queue<double> maxHeap;
-        std::priority_queue<double,std::vector<double>,std::greater<double>> minHeap;
+class MaxMinTracker {
+public:
+    void showMaxMin(const std::vector<double>& prices) const;
 };
 
 #endif

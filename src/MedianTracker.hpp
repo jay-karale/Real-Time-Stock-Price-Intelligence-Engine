@@ -1,8 +1,11 @@
-#ifndef MEDIANTRACKER_HPP
-#define MEDIANTRACKER_HPP
+#ifndef MEDIAN_TRACKER_HPP
+#define MEDIAN_TRACKER_HPP
 
-class MedianTracker{
-    
+#include <vector>
+
+class MedianTracker {
+public:
+    void showMedian(const std::vector<double>& prices) const;
 };
 
 #endif
