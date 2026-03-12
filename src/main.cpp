@@ -12,6 +12,7 @@ using namespace std;
 #include "AnomalyDetector.hpp"
 #include "OrderBook.hpp"
 #include "Utils.hpp"
+#include "APIClient.hpp"
 
 int main() {
 
@@ -24,6 +25,7 @@ int main() {
     AnomalyDetector anomaly;
     OrderBook orderBook;
     Utils utils;
+    APIClient api;
 
     bool pricesEntered = false;
     int choice;
@@ -33,14 +35,15 @@ int main() {
         cout << "Real-Time Stock Price Intelligence System\n";
         utils.showLine();
         cout << "1. Add Price Stream\n";
-        cout << "2. Show Max & Min Price\n";
-        cout << "3. Show Median Price\n";
-        cout << "4. Show Sliding Window Median\n";
-        cout << "5. Show Moving Average\n";
-        cout << "6. Show Volatility\n";
-        cout << "7. Detect Anomaly\n";
-        cout << "8. Order Book Simulation\n";
-        cout << "9. Exit\n";
+        cout << "2. Fetch Price From API\n";
+        cout << "3. Show Max & Min Price\n";
+        cout << "4. Show Median Price\n";
+        cout << "5. Show Sliding Window Median\n";
+        cout << "6. Show Moving Average\n";
+        cout << "7. Show Volatility\n";
+        cout << "8. Detect Anomaly\n";
+        cout << "9. Order Book Simulation\n";
+        cout << "10. Exit\n";
         utils.showLine();
         cout << "Enter your choice: ";
 
@@ -65,31 +68,47 @@ int main() {
             pricesEntered = true;
             cout << "Prices added successfully\n";
         }
-        else if (choice >= 2 && choice <= 7 && !pricesEntered) {
+        else if (choice == 2) {
+            string symbol;
+            cout << "Enter stock symbol (AAPL, TSLA etc): ";
+            cin >> symbol;
+            cin.ignore();
+
+            double price = api.fetchPrice(symbol);
+
+            if (price > 0) {
+                priceStream.addPrice(price);
+                cout << "Fetched price: " << price << endl;
+                pricesEntered = true;
+            } else {
+                cout << "Failed to fetch price\n";
+            }
+     }
+        else if (choice >= 3 && choice <= 8 && !pricesEntered) {
             cout << "Please add prices first!\n";
         }
-        else if (choice == 2) {
+        else if (choice == 3) {
             maxMin.showMaxMin(priceStream.getPrices());
         }
-        else if (choice == 3) {
+        else if (choice == 4) {
             median.showMedian(priceStream.getPrices());
         }
-        else if (choice == 4) {
+        else if (choice == 5) {
             slidingMedian.showSlidingMedian(priceStream.getPrices(), 3);
         }
-        else if (choice == 5) {
+        else if (choice == 6) {
             movingAvg.showAverage(priceStream.getPrices());
         }
-        else if (choice == 6) {
+        else if (choice == 7) {
             volatility.showVolatility(priceStream.getPrices());
         }
-        else if (choice == 7) {
+        else if (choice == 8) {
             anomaly.detect(priceStream.getPrices());
         }
-        else if (choice == 8) {
+        else if (choice == 9) {
            orderBook.executeOrder(priceStream.getPrices());
         }
-        else if (choice == 9) {
+        else if (choice == 10) {
             cout << "Exiting Program...\n";
             break;
         }
