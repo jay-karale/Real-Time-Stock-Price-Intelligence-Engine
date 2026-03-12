@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "name": "Win32",
+      "includePath": [
+        "${workspaceFolder}/src",
+        "C:/Users/jai/Downloads/curl-8.19.0_1-win64-mingw/curl-8.19.0_1-win64-mingw/include"
+      ],
+      "compilerPath": "C:/MinGW/bin/g++.exe",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-gcc-x64"
+    }
+  ],
+  "version": 4
+}

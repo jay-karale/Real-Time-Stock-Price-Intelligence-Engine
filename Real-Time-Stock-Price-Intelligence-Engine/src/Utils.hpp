@@ -1,9 +1,0 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
-
-class Utils {
-public:
-    void showLine() const;
-};
-
-#endif
