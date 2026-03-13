@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <windows.h>
+
 using namespace std;
 
 #include "PriceStream.hpp"
@@ -57,6 +59,7 @@ int main() {
         }
 
         if (choice == 1) {
+
             cout << "Enter prices (space separated): ";
             getline(cin, line);
             stringstream ss2(line);
@@ -65,53 +68,79 @@ int main() {
             while (ss2 >> p) {
                 priceStream.addPrice(p);
             }
+
             pricesEntered = true;
             cout << "Prices added successfully\n";
         }
+
         else if (choice == 2) {
+
             string symbol;
+            int count;
+
             cout << "Enter stock symbol (AAPL, TSLA etc): ";
             cin >> symbol;
+
+            cout << "Enter number of prices to fetch: ";
+            cin >> count;
             cin.ignore();
 
-            double price = api.fetchPrice(symbol);
+            cout << "\nFetching prices...\n";
 
-            if (price > 0) {
-                priceStream.addPrice(price);
-                cout << "Fetched price: " << price << endl;
-                pricesEntered = true;
-            } else {
-                cout << "Failed to fetch price\n";
+            for (int i = 0; i < count; i++) {
+
+                double price = api.fetchPrice(symbol);
+
+                if (price > 0) {
+                    priceStream.addPrice(price);
+                    cout << i + 1 << " -> " << price << " added\n";
+                    pricesEntered = true;
+                } 
+                else {
+                    cout << "Fetch failed\n";
+                }
+
+                Sleep(2000);
             }
-     }
+        }
+
         else if (choice >= 3 && choice <= 8 && !pricesEntered) {
             cout << "Please add prices first!\n";
         }
+
         else if (choice == 3) {
             maxMin.showMaxMin(priceStream.getPrices());
         }
+
         else if (choice == 4) {
             median.showMedian(priceStream.getPrices());
         }
+
         else if (choice == 5) {
             slidingMedian.showSlidingMedian(priceStream.getPrices(), 3);
         }
+
         else if (choice == 6) {
             movingAvg.showAverage(priceStream.getPrices());
         }
+
         else if (choice == 7) {
             volatility.showVolatility(priceStream.getPrices());
         }
+
         else if (choice == 8) {
             anomaly.detect(priceStream.getPrices());
         }
+
         else if (choice == 9) {
-           orderBook.executeOrder(priceStream.getPrices());
+            orderBook.executeOrder(priceStream.getPrices());
         }
+
         else if (choice == 10) {
             cout << "Exiting Program...\n";
             break;
         }
+
         else {
             cout << "Invalid choice\n";
         }
