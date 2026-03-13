@@ -1,13 +1,12 @@
 📈 Real-Time Stock Price Intelligence Engine (Console Based)
 
-A console-based C++ project that simulates real-time stock price analysis using core Data Structures and Algorithms (DSA).
-The project processes a single price stream and derives multiple analytical insights similar to basic financial systems.
+- A console-based C++ project that simulates real-time stock price analysis using core Data Structures and Algorithms (DSA). The project processes a single price stream and derives multiple analytical insights similar to basic financial systems.
 
 🚀 Project Objective
 
 - Understand how streaming numerical data can be analyzed efficiently
 
-- Apply DSA concepts like heap , vectors and sliding windows
+- Apply DSA concepts like heap, vectors and sliding windows
 
 - Build a placement-oriented, menu-driven C++ project
 
@@ -17,9 +16,21 @@ The project processes a single price stream and derives multiple analytical insi
 
 🔄 Price Stream Input
 
-- User enters prices once
+- User enters prices manually once
 
 - All modules work on the same stored price stream
+
+🌐 Real-Time Price Fetching (API Integration)
+
+- Fetch real-time stock prices using an external financial API
+
+- User can specify how many price values to fetch
+
+- Prices are fetched sequentially with a small delay to simulate a live market feed
+
+- Small controlled variation is applied to mimic real-time market tick movement
+
+- Fetched prices automatically get added to the same price stream used by all analytics modules
 
 📊 Max & Min Price Tracking
 
@@ -65,6 +76,10 @@ The project processes a single price stream and derives multiple analytical insi
 
 - Basic statistics (mean & deviation)
 
+- API data fetching using system calls
+
+- Randomized variation to simulate market tick movement
+
 - Modular design using .hpp and .cpp files
 
 - Object-Oriented Programming (OOP)
@@ -75,19 +90,23 @@ The project processes a single price stream and derives multiple analytical insi
 
 - Menu-driven user interaction
 
-- No GUI, no external APIs
+- Real-time price fetching via API
 
-- Focused on logic, DSA, and clean design
+- Focused on logic, DSA, and clean modular design
 
 📌 Learning Outcomes
 
 - How multiple analytics modules can work on a single data source
+
+- Integrating external APIs with C++
 
 - Applying DSA concepts to real-life inspired problems
 
 - Writing modular, maintainable C++ code
 
 - Building confidence for technical interviews
+
+- Understanding how real-time financial data streams can be processed
 
 ▶️ How to Run
 
@@ -97,11 +116,16 @@ The project processes a single price stream and derives multiple analytical insi
 
 - Run the executable
 
-- Use the menu to add prices and analyze data
+- Use the menu to either:
+
+-> Add manual price streams
+
+-> Fetch real-time prices from API
+
+-> Run analytics on the collected data
 
 ⚠️ Disclaimer
 
-This project is an educational simulation only.
-It does not provide financial advice or real trading functionality.
+- This project is an educational simulation only. It does not provide financial advice or real trading functionality.
 
 ⭐ Feedback and suggestions are welcome.
