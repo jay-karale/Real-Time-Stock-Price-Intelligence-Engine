@@ -6,14 +6,9 @@
       "type": "shell",
       "command": "g++",
       "args": [
-        "src/*.cpp",
-        "-I",
-        "C:/Users/jai/Downloads/curl-8.19.0_1-win64-mingw/curl-8.19.0_1-win64-mingw/include",
-        "-L",
-        "C:/Users/jai/Downloads/curl-8.19.0_1-win64-mingw/curl-8.19.0_1-win64-mingw/lib",
-        "-lcurl",
+        "src\\*.cpp",
         "-o",
-        "stockEngine.exe"
+        "pricestream.exe"
       ],
       "group": {
         "kind": "build",

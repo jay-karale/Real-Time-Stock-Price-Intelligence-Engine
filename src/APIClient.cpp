@@ -1,54 +1,54 @@
 #include "APIClient.hpp"
 #include <iostream>
+#include <cstdio>
+#include <memory>
+#include <array>
 #include <string>
-#include <curl/curl.h>
+#include <stdio.h>
+#include <process.h>
 
 using namespace std;
 
-static size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* output) {
-    size_t totalSize = size * nmemb;
-    output->append((char*)contents, totalSize);
-    return totalSize;
-}
+#include "APIClient.hpp"
+#include <iostream>
+#include <cstdio>
+#include <memory>
+#include <array>
+#include <string>
+#include <stdio.h>
+#include <fstream>
+
+using namespace std;
 
 double APIClient::fetchPrice(const string& symbol) {
 
-    CURL* curl;
-    CURLcode res;
-    string response;
-
     string apiKey = "XVLQ3MMKTU0EWGDW";
 
-    string url =
-        "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
-        + symbol +
-        "&apikey=" + apiKey;
+    string command =
+    "curl \"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
+    + symbol +
+    "&apikey=" + apiKey + "\" > temp_response.json";
 
-    curl = curl_easy_init();
+    int ret = system(command.c_str());
+    if (ret != 0) return -1;
 
-    if (curl) {
+    ifstream file("temp_response.json");
+    if (!file.is_open()) return -1;
 
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    string result((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
+    file.close();
 
-        res = curl_easy_perform(curl);
+   
+    remove("temp_response.json");
 
-        curl_easy_cleanup(curl);
+    string key = "\"05. price\": \"";
+    size_t pos = result.find(key);
 
-        if (res != CURLE_OK) {
-            return -1;
-        }
-
-        string key = "\"05. price\": \"";
-        size_t pos = response.find(key);
-
-        if (pos != string::npos) {
-            pos += key.length();
-            size_t end = response.find("\"", pos);
-            string priceStr = response.substr(pos, end - pos);
-            return stod(priceStr);
-        }
+    if (pos != string::npos) {
+        pos += key.length();
+        size_t end = result.find("\"",pos);
+        string price = result.substr(pos,end-pos);
+        return stod(price);
     }
 
     return -1;

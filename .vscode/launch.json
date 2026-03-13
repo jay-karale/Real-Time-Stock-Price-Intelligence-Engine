@@ -1,15 +1,13 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "Run Stock Engine",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/stock.exe",
-      "args": [],
-      "stopAtEntry": false,
+      "program": "${workspaceFolder}/pricestream.exe",
       "cwd": "${workspaceFolder}",
-      "environment": [],
       "externalConsole": true,
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
