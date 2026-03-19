@@ -8,7 +8,7 @@
       "args": [
         "src\\*.cpp",
         "-o",
-        "pricestream.exe"
+        "MarketPulse.exe"
       ],
       "group": {
         "kind": "build",

@@ -6,7 +6,7 @@
       "name": "Run Stock Engine",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/pricestream.exe",
+      "program": "${workspaceFolder}/release/MarketPulse.exe",
       "cwd": "${workspaceFolder}",
       "externalConsole": true,
       "MIMode": "gdb",
