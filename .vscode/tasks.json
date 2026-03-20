@@ -2,11 +2,23 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build stock engine",
+      "label": "build marketpulse",
       "type": "shell",
       "command": "g++",
       "args": [
-        "src\\*.cpp",
+        "-std=c++17",
+        "-Iinclude",
+        "src/main.cpp",
+        "src/OrderBook.cpp",
+        "src/MovingAverage.cpp",
+        "src/PriceStream.cpp",
+        "src/MaxMinTracker.cpp",
+        "src/MedianTracker.cpp",
+        "src/SlidingWindowMedian.cpp",
+        "src/VolatilityTracker.cpp",
+        "src/AnomalyDetector.cpp",
+        "src/Utils.cpp",
+        "src/APIClient.cpp",
         "-o",
         "MarketPulse.exe"
       ],

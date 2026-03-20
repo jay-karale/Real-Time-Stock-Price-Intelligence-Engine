@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <windows.h>
+#include <memory>
+#include <thread>
+#include <chrono>
 
 using namespace std;
 
@@ -22,7 +24,7 @@ int main() {
     MaxMinTracker maxMin;
     MedianTracker median;
     SlidingWindowMedian slidingMedian;
-    MovingAverage movingAvg;
+    unique_ptr<MovingAverage> movingAvg = nullptr;
     VolatilityTracker volatility;
     AnomalyDetector anomaly;
     OrderBook orderBook;
@@ -33,9 +35,11 @@ int main() {
     int choice;
 
     while (true) {
+
         utils.showLine();
         cout << "Real-Time Stock Price Intelligence System\n";
         utils.showLine();
+
         cout << "1. Add Price Stream\n";
         cout << "2. Fetch Price From API\n";
         cout << "3. Show Max & Min Price\n";
@@ -46,6 +50,7 @@ int main() {
         cout << "8. Detect Anomaly\n";
         cout << "9. Order Book Simulation\n";
         cout << "10. Exit\n";
+
         utils.showLine();
         cout << "Enter your choice: ";
 
@@ -67,6 +72,8 @@ int main() {
             double p;
             while (ss2 >> p) {
                 priceStream.addPrice(p);
+                if (movingAvg)
+                    movingAvg->update(p);
             }
 
             pricesEntered = true;
@@ -78,7 +85,7 @@ int main() {
             string symbol;
             int count;
 
-            cout << "Enter stock symbol (AAPL, TSLA etc): ";
+            cout << "Enter stock symbol: ";
             cin >> symbol;
 
             cout << "Enter number of prices to fetch: ";
@@ -93,18 +100,21 @@ int main() {
 
                 if (price > 0) {
                     priceStream.addPrice(price);
+
+                    if (movingAvg)
+                        movingAvg->update(price);
+
                     cout << i + 1 << " -> " << price << " added\n";
                     pricesEntered = true;
-                } 
-                else {
+                } else {
                     cout << "Fetch failed\n";
                 }
 
-                Sleep(2000);
+                std::this_thread::sleep_for(std::chrono::seconds(2));
             }
         }
 
-        else if (choice >= 3 && choice <= 8 && !pricesEntered) {
+        else if (choice >= 3 && choice <= 9 && !pricesEntered) {
             cout << "Please add prices first!\n";
         }
 
@@ -121,7 +131,33 @@ int main() {
         }
 
         else if (choice == 6) {
-            movingAvg.showAverage(priceStream.getPrices());
+
+            const auto& prices = priceStream.getPrices();
+
+            if (prices.empty()) {
+                cout << "Please add prices first!\n";
+                continue;
+            }
+
+            if (!movingAvg) {
+
+                size_t window;
+                cout << "Enter Moving Average window size: ";
+                cin >> window;
+                cin.ignore();
+
+                movingAvg = make_unique<MovingAverage>(window);
+
+                for (double p : prices)
+                    movingAvg->update(p);
+            }
+
+            auto avg = movingAvg->getAverage();
+
+            if (avg)
+                cout << "Moving Average: " << *avg << endl;
+            else
+                cout << "Not enough data\n";
         }
 
         else if (choice == 7) {
@@ -133,7 +169,30 @@ int main() {
         }
 
         else if (choice == 9) {
-            orderBook.executeOrder(priceStream.getPrices());
+
+            int type, qty;
+
+            cout << "1. Buy\n2. Sell\n";
+            cout << "Enter order type: ";
+            cin >> type;
+
+            cout << "Enter quantity: ";
+            cin >> qty;
+            cin.ignore();
+
+            Order order;
+            order.type = (type == 1) ? OrderType::BUY : OrderType::SELL;
+            order.quantity = qty;
+
+            ExecutionResult res =
+                orderBook.executeOrder(order, priceStream.getPrices());
+
+            cout << res.message << endl;
+
+            if (res.success) {
+                cout << "Quantity: " << res.quantity << endl;
+                cout << "Execution Price: " << res.executionPrice << endl;
+            }
         }
 
         else if (choice == 10) {

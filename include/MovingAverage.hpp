@@ -1,12 +1,21 @@
-#ifndef MOVING_AVERAGE_HPP
-#define MOVING_AVERAGE_HPP
+#ifndef MOVINGAVERAGE_HPP
+#define MOVINGAVERAGE_HPP
 
-#include <vector>
+#include <queue>
+#include <optional>
+#include <cstddef>
 
 class MovingAverage {
 public:
-    void showAverage(const std::vector<double>& prices) const;
+    explicit MovingAverage(size_t windowSize);
+
+    void update(double price);
+    std::optional<double> getAverage() const;
+
+private:
+    size_t window;
+    std::queue<double> buffer;
+    double runningSum;
 };
 
 #endif
-
