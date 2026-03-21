@@ -148,6 +148,9 @@ Tested manually with:
 * API-based real-time simulation
 * Edge cases (empty input, small datasets, invalid entries)
 
+## 📄 License
+This project is licensed under a simplified MIT License.
+
 ⚠️ Disclaimer
 
 This project is an educational simulation only. It does not provide financial advice or real trading functionality.
