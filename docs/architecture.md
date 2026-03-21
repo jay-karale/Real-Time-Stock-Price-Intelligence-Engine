@@ -48,11 +48,9 @@
                                  ▼
                     ┌────────────────────────────┐
                     │        Console Output      │
-                    │   (Results displayed)     │
+                    │   (Results displayed)      │
                     └────────────────────────────┘
 ```
-
----
 
 ## Key Design Concepts
 

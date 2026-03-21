@@ -4,6 +4,9 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <limits>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
 
@@ -18,7 +21,10 @@ using namespace std;
 #include "Utils.hpp"
 #include "APIClient.hpp"
 
-int main() {
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     PriceStream priceStream;
     MaxMinTracker maxMin;
@@ -34,8 +40,8 @@ int main() {
     bool pricesEntered = false;
     int choice;
 
-    while (true) {
-
+    while (true)
+    {
         utils.showLine();
         cout << "Real-Time Stock Price Intelligence System\n";
         utils.showLine();
@@ -52,25 +58,47 @@ int main() {
         cout << "10. Exit\n";
 
         utils.showLine();
-        cout << "Enter your choice: ";
 
         string line;
-        getline(cin, line);
-        stringstream ss(line);
 
-        if (!(ss >> choice)) {
-            cout << "Invalid input\n";
-            continue;
+        cout << "Enter your choice: " << flush;
+
+        while (true)
+        {
+            if (!getline(cin, line))
+                return 0;
+
+            if (line.size() == 0)
+                continue;
+
+            line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end());
+
+            if (line.empty())
+                continue;
+
+            try
+            {
+                choice = stoi(line);
+                break;
+            }
+            catch (...)
+            {
+                cout << "Invalid input\n";
+                cout << "Enter your choice: " << flush;
+            }
         }
 
-        if (choice == 1) {
-
+        if (choice == 1)
+        {
             cout << "Enter prices (space separated): ";
-            getline(cin, line);
-            stringstream ss2(line);
+            if (!getline(cin, line))
+                return 0;
 
+            stringstream ss(line);
             double p;
-            while (ss2 >> p) {
+
+            while (ss >> p)
+            {
                 priceStream.addPrice(p);
                 if (movingAvg)
                     movingAvg->update(p);
@@ -80,25 +108,43 @@ int main() {
             cout << "Prices added successfully\n";
         }
 
-        else if (choice == 2) {
-
-            string symbol;
+        else if (choice == 2)
+        {
+            string symbol, input;
             int count;
 
             cout << "Enter stock symbol: ";
-            cin >> symbol;
+            if (!getline(cin, symbol))
+                return 0;
 
             cout << "Enter number of prices to fetch: ";
-            cin >> count;
-            cin.ignore();
+            if (!getline(cin, input))
+                return 0;
+
+            try
+            {
+                count = stoi(input);
+            }
+            catch (...)
+            {
+                cout << "Invalid input\n";
+                continue;
+            }
+
+            if (count <= 0)
+            {
+                cout << "Count must be > 0\n";
+                continue;
+            }
 
             cout << "\nFetching prices...\n";
 
-            for (int i = 0; i < count; i++) {
-
+            for (int i = 0; i < count; i++)
+            {
                 double price = api.fetchPrice(symbol);
 
-                if (price > 0) {
+                if (price > 0)
+                {
                     priceStream.addPrice(price);
 
                     if (movingAvg)
@@ -106,45 +152,69 @@ int main() {
 
                     cout << i + 1 << " -> " << price << " added\n";
                     pricesEntered = true;
-                } else {
+                }
+                else
+                {
                     cout << "Fetch failed\n";
                 }
 
-                std::this_thread::sleep_for(std::chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(2));
             }
         }
 
-        else if (choice >= 3 && choice <= 9 && !pricesEntered) {
+        else if (choice >= 3 && choice <= 9 && !pricesEntered)
+        {
             cout << "Please add prices first!\n";
         }
 
-        else if (choice == 3) {
+        else if (choice == 3)
+        {
             maxMin.showMaxMin(priceStream.getPrices());
         }
 
-        else if (choice == 4) {
+        else if (choice == 4)
+        {
             median.showMedian(priceStream.getPrices());
         }
 
-        else if (choice == 5) {
+        else if (choice == 5)
+        {
             slidingMedian.showSlidingMedian(priceStream.getPrices(), 3);
         }
 
-        else if (choice == 6) {
+        else if (choice == 6)
+        {
+            const auto &prices = priceStream.getPrices();
 
-            const auto& prices = priceStream.getPrices();
-
-            if (prices.empty()) {
+            if (prices.empty())
+            {
                 cout << "Please add prices first!\n";
                 continue;
             }
 
-            if (!movingAvg) {
-
+            if (!movingAvg)
+            {
                 size_t window;
+
                 cout << "Enter Moving Average window size: ";
-                cin >> window;
-                cin.ignore();
+                if (!getline(cin, line))
+                    return 0;
+
+                try
+                {
+                    window = stoul(line);
+                }
+                catch (...)
+                {
+                    cout << "Invalid input\n";
+                    continue;
+                }
+
+                if (window == 0)
+                {
+                    cout << "Window size must be > 0\n";
+                    continue;
+                }
 
                 movingAvg = make_unique<MovingAverage>(window);
 
@@ -160,25 +230,62 @@ int main() {
                 cout << "Not enough data\n";
         }
 
-        else if (choice == 7) {
+        else if (choice == 7)
+        {
             volatility.showVolatility(priceStream.getPrices());
         }
 
-        else if (choice == 8) {
+        else if (choice == 8)
+        {
             anomaly.detect(priceStream.getPrices());
         }
 
-        else if (choice == 9) {
-
+        else if (choice == 9)
+        {
+            string input;
             int type, qty;
 
             cout << "1. Buy\n2. Sell\n";
-            cout << "Enter order type: ";
-            cin >> type;
+            cout << "Enter order type (1=Buy, 2=Sell): ";
+
+            if (!getline(cin, input))
+                return 0;
+
+            try
+            {
+                type = stoi(input);
+            }
+            catch (...)
+            {
+                cout << "Invalid input\n";
+                continue;
+            }
+
+            if (type != 1 && type != 2)
+            {
+                cout << "Invalid order type. Choose 1 or 2.\n";
+                continue;
+            }
 
             cout << "Enter quantity: ";
-            cin >> qty;
-            cin.ignore();
+            if (!getline(cin, input))
+                return 0;
+
+            try
+            {
+                qty = stoi(input);
+            }
+            catch (...)
+            {
+                cout << "Invalid input\n";
+                continue;
+            }
+
+            if (qty <= 0)
+            {
+                cout << "Quantity must be > 0\n";
+                continue;
+            }
 
             Order order;
             order.type = (type == 1) ? OrderType::BUY : OrderType::SELL;
@@ -189,18 +296,21 @@ int main() {
 
             cout << res.message << endl;
 
-            if (res.success) {
+            if (res.success)
+            {
                 cout << "Quantity: " << res.quantity << endl;
                 cout << "Execution Price: " << res.executionPrice << endl;
             }
         }
 
-        else if (choice == 10) {
+        else if (choice == 10)
+        {
             cout << "Exiting Program...\n";
             break;
         }
 
-        else {
+        else
+        {
             cout << "Invalid choice\n";
         }
     }
