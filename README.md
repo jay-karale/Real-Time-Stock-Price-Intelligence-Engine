@@ -1,36 +1,32 @@
 📈 Real-Time Stock Price Intelligence Engine (Console Based)
 
-- A console-based C++ project that simulates real-time stock price analysis using core Data Structures and Algorithms (DSA). The project processes a single price stream and derives multiple analytical insights similar to basic financial systems.
+A console-based C++ project that simulates real-time stock price analysis using core Data Structures and Algorithms (DSA). The system now integrates live API-based price fetching, streaming analytics, and a basic order execution simulation inspired by real-world trading systems.
 
 🚀 Project Objective
 
-- Understand how streaming numerical data can be analyzed efficiently
+- Understand how streaming numerical data can be    analyzed efficiently
 
-- Apply DSA concepts like heap, vectors and sliding windows
+- Apply DSA concepts like heaps, vectors, sliding windows, and streaming updates
 
-- Build a placement-oriented, menu-driven C++ project
+- Build a placement-oriented, modular C++ project
 
 - Simulate basic stock market analytics at an educational level
 
-🧠 Key Features (Implemented)
+🧠 Key Features (Updated)
 
 🔄 Price Stream Input
 
-- User enters prices manually once
+- User can manually enter prices or fetch them from API
 
-- All modules work on the same stored price stream
+- All modules work on a shared real-time price stream
 
-🌐 Real-Time Price Fetching (API Integration)
+🌐 Live API Price Fetching
 
-- Fetch real-time stock prices using an external financial API
+- Fetches stock prices using Alpha Vantage API
 
-- User can specify how many price values to fetch
+- Simulates real-time streaming with delay control
 
-- Prices are fetched sequentially with a small delay to simulate a live market feed
-
-- Small controlled variation is applied to mimic real-time market tick movement
-
-- Fetched prices automatically get added to the same price stream used by all analytics modules
+- Automatically appends fetched data to the system
 
 📊 Max & Min Price Tracking
 
@@ -44,25 +40,31 @@
 
 - Calculates median for recent prices using a fixed window
 
-📈 Moving Average
+📈 Moving Average (Dynamic)
 
-- Computes average price to understand overall trend
+- Uses streaming updates instead of recomputation
+
+- Supports custom window size
+
+- Efficient implementation using incremental updates
 
 📉 Volatility Calculation
 
-- Measures price variation using simple statistical logic
+- Measures price variation using statistical logic
 
 🚨 Anomaly Detection
 
-- Detects sudden price changes beyond a threshold
+- Detects sudden price spikes or drops beyond threshold
 
-🏦 Order Book Simulation (Basic)
+🏦 Order Book Simulation (Enhanced)
 
-- Console-based buy/sell order simulation
+- Supports Buy/Sell order input
 
-- Demonstrates how trades are conceptually executed
+- Simulates trade execution using available price stream
 
-- No real trading or matching engine involved
+- Returns execution result (success/failure, price, quantity)
+
+- Demonstrates basic trade flow (not a real matching engine)
 
 🛠 Data Structures & Concepts Used
 
@@ -70,62 +72,85 @@
 
 - priority_queue (Min/Max Heap)
 
-- Sorting-based median logic
-
 - Sliding window technique
+
+- Streaming algorithms (incremental updates)
 
 - Basic statistics (mean & deviation)
 
-- API data fetching using system calls
-
-- Randomized variation to simulate market tick movement
+- Object-Oriented Programming (OOP)
 
 - Modular design using .hpp and .cpp files
-
-- Object-Oriented Programming (OOP)
 
 🖥 Project Type
 
 - Console-based application
 
-- Menu-driven user interaction
+- Menu-driven interaction
 
-- Real-time price fetching via API
+- Integrated API-based simulation
 
-- Focused on logic, DSA, and clean modular design
+- Focused on logic, DSA, and clean architecture
 
 📌 Learning Outcomes
 
-- How multiple analytics modules can work on a single data source
+- Working with real-time-like data streams
 
-- Integrating external APIs with C++
+- Designing multiple analytics modules on shared data
 
-- Applying DSA concepts to real-life inspired problems
+- Understanding system design at a basic fintech level
 
-- Writing modular, maintainable C++ code
+- Building modular and scalable C++ applications
 
-- Building confidence for technical interviews
-
-- Understanding how real-time financial data streams can be processed
+- Handling API integration in C++
 
 ▶️ How to Run
 
-- Clone the repository
+Option 1: Run from Source
 
-- Compile using a C++17 compatible compiler
+1. Clone the repository
+   git clone <your-repo-link>
 
-- Run the executable
+2. Navigate to project
+   cd MarketPulse
 
-- Use the menu to either:
+3. Compile (example)
+   g++ src/*.cpp -o MarketPulse
 
--> Add manual price streams
+4. Run
+   ./MarketPulse
 
--> Fetch real-time prices from API
+Option 2: Run Prebuilt Executable
 
--> Run analytics on the collected data
+1. Go to Releases section on GitHub
+
+2. Download:
+
+* MarketPulse.exe
+* libcurl-x64.dll
+
+3. Run MarketPulse.exe
+
+4. Follow menu instructions
+
+📷 Sample Flow
+
+* Fetch prices using API
+* Store in stream
+* Analyze using median / volatility / moving average
+* Execute simulated buy/sell orders
+
+🧪 Testing
+
+Tested manually with:
+
+* Manual input streams
+* API-based real-time simulation
+* Edge cases (empty input, small datasets, invalid entries)
 
 ⚠️ Disclaimer
 
-- This project is an educational simulation only. It does not provide financial advice or real trading functionality.
+This project is an educational simulation only. It does not provide financial advice or real trading functionality.
 
-⭐ Feedback and suggestions are welcome.
+⭐ Feedback and suggestions are welcome
+

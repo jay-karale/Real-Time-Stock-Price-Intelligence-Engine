@@ -1,0 +1,7 @@
+*.exe
+*.dll
+*.o
+*.obj
+.vscode/
+release/
+temp_response.json
