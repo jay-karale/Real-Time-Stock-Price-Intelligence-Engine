@@ -90,7 +90,7 @@ int main()
 
         if (choice == 1)
         {
-            cout << "Enter prices (space separated): ";
+            cout << "Enter prices (space separated): " << flush;
             if (!getline(cin, line))
                 return 0;
 
@@ -113,11 +113,11 @@ int main()
             string symbol, input;
             int count;
 
-            cout << "Enter stock symbol: ";
+            cout << "Enter stock symbol ( Example - AAPL , TSLA , etc): " << flush;
             if (!getline(cin, symbol))
                 return 0;
 
-            cout << "Enter number of prices to fetch: ";
+            cout << "Enter number of prices to fetch: " << flush;
             if (!getline(cin, input))
                 return 0;
 
@@ -196,7 +196,7 @@ int main()
             {
                 size_t window;
 
-                cout << "Enter Moving Average window size: ";
+                cout << "Enter Moving Average window size: " << flush;
                 if (!getline(cin, line))
                     return 0;
 
@@ -243,56 +243,68 @@ int main()
         else if (choice == 9)
         {
             string input;
-            int type, qty;
+            int type = 0;
+            int qty = 0;
 
-            cout << "1. Buy\n2. Sell\n";
-            cout << "Enter order type (1=Buy, 2=Sell): ";
-
-            if (!getline(cin, input))
-                return 0;
-
-            try
+            while (true)
             {
-                type = stoi(input);
-            }
-            catch (...)
-            {
-                cout << "Invalid input\n";
-                continue;
-            }
+                cout << "1. Buy\n2. Sell\n";
+                cout << "Enter order type ( 1 = Buy , 2 = Sell ) : " << flush;
+                if (!getline(cin, input))
+                    return 0;
 
-            if (type != 1 && type != 2)
-            {
+                input.erase(remove_if(input.begin(), input.end(), ::isspace), input.end());
+                if (input.empty())
+                    continue;
+
+                try
+                {
+                    type = stoi(input);
+                }
+                catch (...)
+                {
+                    cout << "Invalid input\n";
+                    continue;
+                }
+
+                if (type == 1 || type == 2)
+                    break;
+
                 cout << "Invalid order type. Choose 1 or 2.\n";
-                continue;
             }
 
-            cout << "Enter quantity: ";
-            if (!getline(cin, input))
-                return 0;
+            while (true)
+            {
+                cout << "Enter quantity: " << flush;
 
-            try
-            {
-                qty = stoi(input);
-            }
-            catch (...)
-            {
-                cout << "Invalid input\n";
-                continue;
-            }
+                if (!getline(cin, input))
+                    return 0;
 
-            if (qty <= 0)
-            {
+                input.erase(remove_if(input.begin(), input.end(), ::isspace), input.end());
+                if (input.empty())
+                    continue;
+
+                try
+                {
+                    qty = stoi(input);
+                }
+                catch (...)
+                {
+                    cout << "Invalid input\n";
+                    continue;
+                }
+
+                if (qty > 0)
+                    break;
+
                 cout << "Quantity must be > 0\n";
-                continue;
             }
 
             Order order;
             order.type = (type == 1) ? OrderType::BUY : OrderType::SELL;
             order.quantity = qty;
 
-            ExecutionResult res =
-                orderBook.executeOrder(order, priceStream.getPrices());
+            ExecutionResult res = orderBook.executeOrder(order, priceStream.getPrices());
 
             cout << res.message << endl;
 

@@ -7,7 +7,7 @@
                 "C:/Users/jai/Downloads/curl-8.19.0_1-win64-mingw/curl-8.19.0_1-win64-mingw/include",
                 "${workspaceFolder}/include"
             ],
-            "compilerPath": "C:\\mingw64\\bin\\g++.exe",
+            "compilerPath": "C:\\D DRIVE FOLDER\\mingw64\\bin\\g++.exe",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x64"
         }

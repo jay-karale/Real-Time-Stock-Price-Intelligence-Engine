@@ -4,7 +4,7 @@
     {
       "label": "build marketpulse",
       "type": "shell",
-      "command": "g++",
+      "command": "C:\\D DRIVE FOLDER\\mingw64\\bin\\g++.exe",
       "args": [
         "-std=c++17",
         "-Iinclude",
@@ -20,7 +20,7 @@
         "src/Utils.cpp",
         "src/APIClient.cpp",
         "-o",
-        "MarketPulse.exe"
+        "/release/MarketPulse.exe"
       ],
       "group": {
         "kind": "build",
