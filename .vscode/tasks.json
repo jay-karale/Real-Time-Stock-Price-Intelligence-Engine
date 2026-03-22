@@ -20,7 +20,7 @@
         "src/Utils.cpp",
         "src/APIClient.cpp",
         "-o",
-        "/release/MarketPulse.exe"
+        "release/MarketPulse.exe"
       ],
       "group": {
         "kind": "build",

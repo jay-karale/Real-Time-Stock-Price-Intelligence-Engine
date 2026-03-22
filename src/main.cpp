@@ -23,6 +23,8 @@ using namespace std;
 
 int main()
 {
+    srand(time(0));
+
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
@@ -155,10 +157,10 @@ int main()
                 }
                 else
                 {
-                    cout << "Fetch failed\n";
+                    cout << "Using simulated price\n";
                 }
 
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(3));
             }
         }
 
